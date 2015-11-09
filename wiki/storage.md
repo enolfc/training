@@ -9,7 +9,7 @@ You need to have defined in the environement:
  ```
 occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action create --resource storage \
-     --attribute occi.core.title="wiki" \
+     --attribute occi.core.title="wikidata_$(date +%s)" \
      --attribute occi.storage.size='num(1)'
 ```
 
