@@ -54,6 +54,12 @@ sudo docker ps
 sudo docker logs faafo_api_1
 ```
 
+Create new fractals:
+```
+sudo docker run --link faafo_api_1:faafo_api_1 egifedcloud/training-fractal \
+	 faafo --endpoint-url http://faafo_api_1 create
+```
+
 ## Worker VM
 
 Get the context file:
@@ -85,27 +91,15 @@ occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
 
 # Sample configurations for the training sites
 ## CESNET
+```
 OCCI_ENDPOINT="https://carach5.ics.muni.cz:11443"
 OS_TPL="http://occi.carach5.ics.muni.cz/occi/infrastructure/os_tpl#uuid_training_fractal_docker_ubuntu_14_04_x86_64_fedcloud_warg_144"
 RES_TPL="http://schema.fedcloud.egi.eu/occi/infrastructure/resource_tpl#small"
+```
 
 ## BIFI
-OCCI_ENDPOINT=
-OS_TPL=""
-RES_TPL=""
-
-## UKIM
-OCCI_ENDPOINT=
-OS_TPL=""
-RES_TPL=""
-
-## CIEMAT
-OCCI_ENDPOINT=
-OS_TPL=""
-RES_TPL=""
-
-## CATANIA
-
-
-
-
+```
+OCCI_ENDPOINT="http://server4-epsh.unizar.es:8787"
+OS_TPL="os_tpl#d9de116e-821c-4230-8a80-4744868541cb"
+RES_TPL="resource_tpl#m1-tiny"
+```
