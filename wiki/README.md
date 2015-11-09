@@ -34,6 +34,15 @@ occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --link /network/public
 ```
 
+## Triggering actions
+```
+occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
+     --action trigger --resource $COMPUTE_ID \
+     --trigger-action action#reboot
+```
+
+
+
 ## Log in
 
 Change <IP_ADDR> to the IP address of your VM:
