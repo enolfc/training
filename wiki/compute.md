@@ -13,7 +13,7 @@ It assumes public ssh-key is available at `$HOME/.ssh/id_rsa.pub`
 occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action create --resource compute \
      --mixin $OS_TPL --mixin $RES_TPL  \
-     --attribute occi.core.title="wiki" \
+     --attribute occi.core.title="wiki_$(date +%s)" \
      --context public_key="file:///$HOME/.ssh/id_rsa.pub"
 ```
 
