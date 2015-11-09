@@ -1,11 +1,16 @@
 #!/bin/bash
-: ${OCCI_ENDPOINT:="https://carach5.ics.muni.cz:11443"}
-: ${VO:=training.egi.eu}
+: ${OCCI_ENDPOINT:=""}
 : ${X509_USER_PROXY:=""}
 
 
 if [ "x$X509_USER_PROXY" = "x" ]; then
     echo "Expecting a X509_USER_PROXY variable to be defined!"
+    exit 1
+fi
+
+if [ "x$OCCI_ENDPOINT" = "x" ]; then
+    echo "Expecting a OCCI_ENDPOINT variable to be defined!"
+    exit 1
 fi
 
 docker inspect occi-voms-proxy &> /dev/null || \
