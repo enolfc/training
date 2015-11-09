@@ -3,7 +3,6 @@
 : ${VO:=training.egi.eu}
 : ${X509_USER_PROXY:=""}
 
-set -x
 
 if [ "x$X509_USER_PROXY" = "x" ]; then
     echo "Expecting a X509_USER_PROXY variable to be defined!"
@@ -12,7 +11,7 @@ fi
 docker inspect occi-voms-proxy &> /dev/null || \
     docker run --name occi-voms-proxy \
         egifedcloud/fedcloud-userinterface \
-        /bin/bash -c "(fetch-crl -v -T 30 -p 2 || true)" &> /dev/null
+        /bin/bash -c "(fetch-crl -v -T 30 || true)"
 
 docker run -it --rm --volumes-from occi-voms-proxy \
            -v $PWD:/data:rw -v $X509_USER_PROXY:/tmp/x509up_u0 \
