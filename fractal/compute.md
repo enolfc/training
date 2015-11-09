@@ -11,7 +11,7 @@ It assumes public ssh-key is available at ~/$HOME/.ssh/id_rsa.pub
 
 Get the context file:
 ```
-curl > master-context.sh
+curl -L https://raw.githubusercontent.com/enolfc/training/master/fractal/master-context.sh > master-context.sh
 ```
 
 Create VM:
@@ -58,7 +58,7 @@ sudo docker logs faafo_api_1
 
 Get the context file:
 ```
-curl -L > worker-context.sh
+curl -L https://raw.githubusercontent.com/enolfc/training/master/fractal/worker-context.sh > worker-context.sh
 ```
 
 Edit the file and set the MASTER_HOST variable with the IP of the master
