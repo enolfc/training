@@ -3,7 +3,7 @@
 
 You need to have defined in the environement:
 - X509_USER_PROXY: your proxy 
-- OCCI_ENDPOINT: the OCCI endpoint for the site you are using
+- ENDPOINT: the OCCI endpoint for the site you are using
 - OS_TPL: VM Image to use for the VM
 - RES_TPL: size of the VM
 
@@ -16,7 +16,7 @@ curl -L https://raw.githubusercontent.com/enolfc/training/master/fractal/master-
 
 Create VM:
 ```
-occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
+occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action create --resource compute \
      --mixin $OS_TPL --mixin $RES_TPL  \
      --attribute occi.core.title="fractal_master_$(date +%s)" \
@@ -29,14 +29,14 @@ Set `COMPUTE_ID` to the identifier returned by the create command
 ## Describe the VM
 
 ```
-occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
+occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action describe --resource $COMPUTE_ID
 ```
 
 ## Link to network
 
 ```
-occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
+occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action link --resource $COMPUTE_ID \
      --link /network/public 
 ```
@@ -70,7 +70,7 @@ curl -L https://raw.githubusercontent.com/enolfc/training/master/fractal/worker-
 Edit the file and set the MASTER_HOST variable with the IP of the master
 
 ```
-occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
+occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action create --resource compute \
      --mixin $OS_TPL --mixin $RES_TPL  \
      --attribute occi.core.title="fractal_master_$(date +%s)" \
@@ -83,23 +83,23 @@ Set `COMPUTE2_ID` to the return value of previous command
 ## Delete VMs
 
 ```
-occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
+occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action delete --resource $COMPUTE_ID
-occi --endpoint $OCCI_ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
+occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action delete --resource $COMPUTE2_ID
 ```
 
 # Sample configurations for the training sites
 ## CESNET
 ```
-OCCI_ENDPOINT="https://carach5.ics.muni.cz:11443"
+ENDPOINT="https://carach5.ics.muni.cz:11443"
 OS_TPL="http://occi.carach5.ics.muni.cz/occi/infrastructure/os_tpl#uuid_training_fractal_docker_ubuntu_14_04_x86_64_fedcloud_warg_144"
 RES_TPL="http://schema.fedcloud.egi.eu/occi/infrastructure/resource_tpl#small"
 ```
 
 ## BIFI
 ```
-OCCI_ENDPOINT="http://server4-epsh.unizar.es:8787"
+ENDPOINT="http://server4-epsh.unizar.es:8787"
 OS_TPL="os_tpl#d9de116e-821c-4230-8a80-4744868541cb"
 RES_TPL="resource_tpl#m1-tiny"
 ```
