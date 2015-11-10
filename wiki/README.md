@@ -7,14 +7,18 @@ You need to have defined in the environement:
 - `OS_TPL`: VM Image to use for the VM
 - `RES_TPL`: size of the VM
 
-It assumes public ssh-key is available at `$HOME/.ssh/id_rsa.pub`
+Create a ssh key to access the VMs:
+```
+ssh-keygen -f fedcloudkey
+```
 
+Create the VM:
 ```
 occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action create --resource compute \
      --mixin $OS_TPL --mixin $RES_TPL  \
      --attribute occi.core.title="wiki_$(date +%s)" \
-     --context public_key="file:///$HOME/.ssh/id_rsa.pub"
+     --context public_key="file:///$PWD/fedcloudkey.pub"
 ```
 
 Set `COMPUTE_ID` to the identifier returned by the create command
@@ -47,7 +51,7 @@ occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
 Change <IP_ADDR> to the IP address of your VM:
 
 ```
-ssh ubuntu@<IP_ADDR>
+ssh -i fedcloudkey ubuntu@<IP_ADDR>
 ```
 
 Check the size of VM:
@@ -146,7 +150,7 @@ occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --mixin $OS_TPL --mixin $RES_TPL  \
      --attribute occi.core.title="wiki_$(date +%s)" \
      --link $STORAGE_ID \
-     --context public_key="file:///$HOME/.ssh/id_rsa.pub"
+     --context public_key="file:///$PWD/fedcloudkey.pub"
 ```
 
 ## Delete the Volume

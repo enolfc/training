@@ -7,7 +7,7 @@ You need to have defined in the environement:
 - OS_TPL: VM Image to use for the VM
 - RES_TPL: size of the VM
 
-It assumes public ssh-key is available at ~/$HOME/.ssh/id_rsa.pub
+It assumes public ssh-key is available at $PWD/fedcloudkey.pub
 
 Get the context file:
 ```
@@ -20,7 +20,7 @@ occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action create --resource compute \
      --mixin $OS_TPL --mixin $RES_TPL  \
      --attribute occi.core.title="fractal_master_$(date +%s)" \
-     --context public_key="file:///$HOME/.ssh/id_rsa.pub"
+     --context public_key="file:///$PWD/fedcloudkey.pub" \
      --context user_data="file:///$PWD/master-context.sh"
 ```
 
@@ -45,7 +45,7 @@ occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
 
 Change <IP_ADDR> to the IP address of your VM:
 ```
-ssh ubuntu@<IP_ADDR>
+ssh -i fedcloud ubuntu@<IP_ADDR>
 ```
 
 Check things are running
@@ -74,7 +74,7 @@ occi --endpoint $ENDPOINT --auth x509 --user-cred $X509_USER_PROXY --voms \
      --action create --resource compute \
      --mixin $OS_TPL --mixin $RES_TPL  \
      --attribute occi.core.title="fractal_master_$(date +%s)" \
-     --context public_key="file:///$HOME/.ssh/id_rsa.pub"
+     --context public_key="file:///$PWD/fedcloudkey.pub" \
      --context user_data="file:///$PWD/worker-context.sh"
 ```
 
